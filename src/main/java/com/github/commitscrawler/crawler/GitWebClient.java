@@ -1,14 +1,13 @@
 package com.github.commitscrawler.crawler;
 
 import com.github.commitscrawler.config.ApiKey;
-import com.github.commitscrawler.domain.Repository;
 import com.github.commitscrawler.domain.commit.CommitDetail;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Component
 public class GitWebClient {
@@ -24,31 +23,34 @@ public class GitWebClient {
                 .build();
     }
 
-    public Repository getLatestRepository(String gitUsername) {
-        Repository latest = this.client.get().uri(uriBuilder ->
-                        uriBuilder.path("/users")
-                                .path("/" + gitUsername)
-                                .path("/repos")
-                                .queryParam("sort", "pushed")// 최근 push 정렬
-                                .queryParam("per_page", "1")// 페이징 요소 5개 제한
-                                .build())
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve().bodyToFlux(Repository.class).collect(Collectors.toList()).block().get(0);
-        if (latest == null) throw new RuntimeException("해당 깃허브 유저가 없습니다.");
-        return latest;
+    public CommitDetail getLatestCommitDetail(String owner, String repo) {
+        return getCommitDetails(owner, repo, 1, 1).blockFirst();
     }
 
-    public List<CommitDetail> getRepositoryCommitDetails(Repository repository) {
-        return getRepositoryCommitDetails(repository, DEFAULT_PER_PAGE, DEFAULT_PAGE);
+    public Flux<CommitDetail> getCommitDetails(String owner, String repo) {
+        return getCommitDetails(owner, repo, DEFAULT_PER_PAGE, DEFAULT_PAGE);
     }
 
-    public List<CommitDetail> getRepositoryCommitDetails(Repository repository, int perPage, int page) {
-        return this.client.get().uri(uriBuilder ->
-                        uriBuilder.path(repository.getCommitsUrlOnlyPath())
-                                .queryParam("per_page", perPage)
-                                .queryParam("page", page)
-                                .build())
+    public Flux<CommitDetail> getCommitDetails(String owner, String repo, int perPage, int page) {
+        return this.client.get().uri(buildCommitUrl(owner, repo, perPage, page))
                 .accept(MediaType.APPLICATION_JSON)
-                .retrieve().bodyToFlux(CommitDetail.class).collect(Collectors.toList()).block();
+                .retrieve()
+                .onStatus(HttpStatus::is4xxClientError, response -> {
+                    System.out.println((response.bodyToMono(String.class)));
+                    return Mono.empty();
+                })
+                .bodyToFlux(CommitDetail.class);
+    }
+
+    private String buildCommitUrl(String owner, String repo, int perPage, int page) {
+        StringBuilder sb = new StringBuilder("/repos")
+                                    .append("/").append(owner)
+                                    .append("/").append(repo)
+                                    .append("/commits")
+                                    .append("?")
+                                    .append("per_page=").append(perPage)
+                                    .append("&")
+                                    .append("page=").append(page);
+        return sb.toString();
     }
 }

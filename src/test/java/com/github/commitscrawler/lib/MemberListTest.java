@@ -10,7 +10,7 @@ class MemberListTest {
     @Test
     @DisplayName("학생 이름으로 검색")
     void findByName() {
-        Member minwoo = new Member("황민우", "menuhwang");
+        Member minwoo = new Member("황민우",	"menuhwang", "LikeLion", "LikeLion");
         Member find = MemberList.findByName(minwoo.getName());
         assertEquals(minwoo.getName(), find.getName());
         assertEquals(minwoo.getGitUsername(), find.getGitUsername());
