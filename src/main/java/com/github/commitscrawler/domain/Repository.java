@@ -1,6 +1,6 @@
 package com.github.commitscrawler.domain;
 
-import com.github.commitscrawler.crawler.GitCommitCrawler;
+import com.github.commitscrawler.crawler.GitWebClient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +17,6 @@ public class Repository {
     private String pushed_at;
 
     public String getCommitsUrlOnlyPath() {
-        return this.commits_url.substring(GitCommitCrawler.BASE_URL.length(), this.commits_url.length() - 6);
+        return this.commits_url.substring(GitWebClient.BASE_URL.length(), this.commits_url.length() - 6);
     }
 }
