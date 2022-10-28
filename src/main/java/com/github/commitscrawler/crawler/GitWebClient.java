@@ -24,6 +24,7 @@ public class GitWebClient {
     }
 
     public CommitDetail getLatestCommitDetail(String owner, String repo) {
+        // todo dto를 받아서 넘길 수 있게 수정 하면 좋지 않을까요?
         return getCommitDetails(owner, repo, 1, 1).blockFirst();
     }
 
