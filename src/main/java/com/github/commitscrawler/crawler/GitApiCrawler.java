@@ -18,7 +18,7 @@ public class GitApiCrawler implements CommitDetailCrawler {
     public GitApiCrawler(WebClient.Builder builder, ApiKey apiKey) {
         System.out.printf("토큰 : %s\n", apiKey.getGitToken());
         this.client = builder.baseUrl(BASE_URL)
-                .defaultHeader("Authorization", apiKey.getGitToken())
+                .defaultHeader("Authorization", "Bearer " + apiKey.getGitToken())
                 .build();
     }
 
