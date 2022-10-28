@@ -18,7 +18,7 @@ class GitCommitCrawlerTest {
     @Test
     @DisplayName("가장 최근 커밋 조회 : Subject.ALGORITHM")
     void getLatestCommitAllMember() {
-        List<CommitPayload> commitPayloads = gitCommitCrawler.getLatestCommitAllMember(Subject.ALGORITHM);
-        System.out.println(commitPayloads);
+//        List<CommitPayload> commitPayloads = gitCommitCrawler.getLatestCommitAllMember(Subject.ALGORITHM);
+//        System.out.println(commitPayloads);
     }
 }
