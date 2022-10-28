@@ -1,10 +1,12 @@
 package com.github.commitscrawler.domain.commit;
 
+import lombok.Getter;
 import lombok.ToString;
 
 import java.util.Date;
 
 @ToString
+@Getter
 public class CommitPayload {
     private String memberName;
     private String message;

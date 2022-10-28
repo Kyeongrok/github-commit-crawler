@@ -7,6 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class CommitDetailRequest {
+    public static final int DEFAULT_PER_PAGE = 5;
+    public static final int DEFAULT_PAGE = 1;
     private String owner;
     private String repo;
 
@@ -17,7 +19,7 @@ public class CommitDetailRequest {
     public CommitDetailRequest(String owner, String repo) {
         this.owner = owner;
         this.repo = repo;
-        this.page = 1;
-        this.perPage = 5;
+        this.page = DEFAULT_PAGE;
+        this.perPage = DEFAULT_PER_PAGE;
     }
 }
