@@ -46,5 +46,6 @@ class GitCommitCrawlerTest {
         assertNull(payload.getMemberName());
         assertNotNull(payload.getMessage());
         assertNotNull(payload.getPush_at());
+
     }
 }
