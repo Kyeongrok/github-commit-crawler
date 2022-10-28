@@ -30,7 +30,7 @@ public class GitApiCrawler implements CommitDetailCrawler {
                     if (response.statusCode().equals(HttpStatus.OK)) {
                         return response.bodyToFlux(CommitDetail.class);
                     }
-                    return Flux.error(new RuntimeException(String.format("[%s] %s 리포지토리 오류\n", response.statusCode(), cdr.getOwner())));
+                    return Flux.error(new RuntimeException(String.format("[%s] GitHub Name : %s, Repo Name : %s", response.statusCode(), cdr.getOwner(), cdr.getRepo())));
                 })
                 .share().collect(Collectors.toList()).block();
     }
