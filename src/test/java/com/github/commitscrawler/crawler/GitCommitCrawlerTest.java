@@ -1,8 +1,9 @@
 package com.github.commitscrawler.crawler;
 
+import com.github.commitscrawler.context.MemberReader;
+import com.github.commitscrawler.context.googlesheets.GoogleSheetsReader;
 import com.github.commitscrawler.domain.commit.CommitPayload;
 import com.github.commitscrawler.domain.dto.CommitDetailRequest;
-import com.github.commitscrawler.lib.MemberList;
 import com.github.commitscrawler.lib.enumeration.Subject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,12 +21,14 @@ class GitCommitCrawlerTest {
     @Autowired
     private ApplicationContext context;
     private CommitDetailCrawler commitDetailCrawler;
+    private MemberReader memberReader;
     private GitCommitCrawler gitCommitCrawler;
 
     @BeforeEach()
     void setUp() {
         commitDetailCrawler = (CommitDetailCrawler) context.getBean("gitApiCrawler");
-        gitCommitCrawler = new GitCommitCrawler(commitDetailCrawler);
+        memberReader = (GoogleSheetsReader) context.getBean("googleSheetsReader");
+        gitCommitCrawler = new GitCommitCrawler(commitDetailCrawler, memberReader);
     }
 
     @Test
@@ -33,7 +36,7 @@ class GitCommitCrawlerTest {
     void getLatestCommitsAllMemberAlgorithm() {
         List<CommitPayload> payloads = gitCommitCrawler.getLatestCommitsAllMember(Subject.ALGORITHM);
         System.out.println(payloads);
-        assertTrue(payloads.size() <= MemberList.getMembers().size());
+        assertTrue(payloads.size() <= 83);
     }
 
     @Test
