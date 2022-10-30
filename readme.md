@@ -13,3 +13,13 @@ github.com/{owner}/{repo}/commits
 
 
 ### Git Token 발급 방법
+1. GitHub에 로그인
+2. 우측 상단에 프로필 클릭, Setting 클릭
+3. 좌측 메뉴 가장 아래 Developer setting 클릭
+4. 좌측 메뉴에 Personal access tokens - Tokens(classic) 클릭
+5. Generate new token - Generate new token (classic) 클릭
+6. Note : token의 별칭 기입 ex) CrawlerToken
+7. Expiration : 만료기간 설정
+8. 선택하지 않아도 api 사용가능. 필요에 따라 선택.
+9. 아래 Generate token 클릭
+10. 화면에 나온 토큰 문자열은 다시 확인할 수 없으니 잘 보관할 것.
