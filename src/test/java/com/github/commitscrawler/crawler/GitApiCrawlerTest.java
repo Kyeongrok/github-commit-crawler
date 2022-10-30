@@ -17,19 +17,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 class GitApiCrawlerTest {
     @Autowired
-    private ApplicationContext context;
     private GitApiCrawler gitApiCrawler;
 
     private final Member member = new Member("황민우", "menuhwang", "LikeLion", "LikeLion");
 
     @BeforeEach
     void setUp() {
-        gitApiCrawler = (GitApiCrawler) context.getBean("gitApiCrawler");
     }
 
     @Test
     @DisplayName("SpringBoot 리포지토리 커밋 리스트 불러오기 : 페이징 기본 설정")
     void getCommitDetail() {
+        System.out.printf("Git Token이 Null인지 %b%n", System.getenv().get("GIT_TOKEN") == null);
         CommitDetailRequest cdr = new CommitDetailRequest(member.getGitUsername(), member.getSpringbootRepository());
         List<CommitDetail> commitDetails = gitApiCrawler.crawlCommitDetail(cdr);
         System.out.println(commitDetails);
