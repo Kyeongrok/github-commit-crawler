@@ -1,26 +1,28 @@
 package com.github.commitscrawler.crawler;
 
+import com.github.commitscrawler.context.MemberReader;
 import com.github.commitscrawler.domain.Member;
 import com.github.commitscrawler.domain.commit.Commit;
 import com.github.commitscrawler.domain.commit.CommitDetail;
 import com.github.commitscrawler.domain.commit.CommitPayload;
 import com.github.commitscrawler.domain.dto.CommitDetailRequest;
-import com.github.commitscrawler.lib.MemberList;
 import com.github.commitscrawler.lib.enumeration.Subject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GitCommitCrawler {
-    private CommitDetailCrawler commitDetailCrawler;
+    private final CommitDetailCrawler commitDetailCrawler;
+    private final MemberReader memberReader;
 
-    public GitCommitCrawler(CommitDetailCrawler commitDetailCrawler) {
+    public GitCommitCrawler(CommitDetailCrawler commitDetailCrawler, MemberReader memberReader) {
         this.commitDetailCrawler = commitDetailCrawler;
+        this.memberReader = memberReader;
     }
 
     public List<CommitPayload> getLatestCommitsAllMember(Subject subject) {
         List<CommitPayload> payloads = new ArrayList<>(); // 멤버들의 최신 커밋 하나씩만 담는 리스트 선언
-        for (Member member : MemberList.getMembers()) {
+        for (Member member : memberReader.read()) {
             if (!member.isValid()) { // 유저 정보가 잘못된 경우 패스
                 System.out.printf("유효하지 않은 유저 정보입니다.\n%s\n", member);
                 continue;
