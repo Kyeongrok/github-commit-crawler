@@ -11,6 +11,12 @@ github.com/{owner}/{repo}/commits
 이 프로젝트는 api.github.com을 호출 하기 때문에 Environment Variable에 GitToken을 넣어주세요.
 넣지 않으면 github.com을 호출 합니다.
 
+토큰을 발급 받은 후 IntelliJ Test Code 실행 전에 아래와 같이 설정 해주어도 됩니다.
+
+![image](https://user-images.githubusercontent.com/1642243/198886054-34692369-93b3-4b9b-befa-ff6b1b4e8945.png)
+
+
+
 ### Git Token 발급 방법
 1. GitHub에 로그인
 2. 우측 상단에 프로필 클릭, Setting 클릭
