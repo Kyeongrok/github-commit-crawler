@@ -36,6 +36,7 @@ class GitCommitCrawlerTest {
     void getLatestCommitsAllMemberAlgorithm() {
         List<CommitPayload> payloads = gitCommitCrawler.getLatestCommitsAllMember(Subject.ALGORITHM);
         System.out.println(payloads);
+        System.out.println(payloads.size());
         assertTrue(payloads.size() <= 83);
     }
 
