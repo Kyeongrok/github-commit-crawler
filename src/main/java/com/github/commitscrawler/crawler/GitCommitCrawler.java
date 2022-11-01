@@ -8,9 +8,7 @@ import com.github.commitscrawler.domain.commit.CommitPayload;
 import com.github.commitscrawler.domain.dto.CommitDetailRequest;
 import com.github.commitscrawler.lib.enumeration.Subject;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class GitCommitCrawler {
