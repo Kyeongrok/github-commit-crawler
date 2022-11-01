@@ -1,7 +1,5 @@
 package com.github.commitscrawler.crawler;
 
-import com.github.commitscrawler.context.MemberReader;
-import com.github.commitscrawler.context.googlesheets.GoogleSheetsReader;
 import com.github.commitscrawler.domain.commit.CommitPayload;
 import com.github.commitscrawler.domain.dto.CommitDetailRequest;
 import com.github.commitscrawler.lib.enumeration.Subject;
@@ -10,7 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
 
 import java.util.List;
 
@@ -19,16 +16,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class GitCommitCrawlerTest {
     @Autowired
-    private ApplicationContext context;
-    private CommitDetailCrawler commitDetailCrawler;
-    private MemberReader memberReader;
     private GitCommitCrawler gitCommitCrawler;
 
     @BeforeEach()
     void setUp() {
-        commitDetailCrawler = (CommitDetailCrawler) context.getBean("gitApiCrawler");
-        memberReader = (GoogleSheetsReader) context.getBean("googleSheetsReader");
-        gitCommitCrawler = new GitCommitCrawler(commitDetailCrawler, memberReader);
     }
 
     @Test
