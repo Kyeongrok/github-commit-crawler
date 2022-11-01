@@ -1,6 +1,5 @@
 package com.github.commitscrawler.crawler;
 
-import com.github.commitscrawler.config.ApiKey;
 import com.github.commitscrawler.domain.commit.CommitDetail;
 import com.github.commitscrawler.domain.dto.CommitDetailRequest;
 import org.springframework.http.HttpStatus;
@@ -15,11 +14,8 @@ public class GitApiCrawler implements CommitDetailCrawler {
     public static final String BASE_URL = "https://api.github.com";
     private final WebClient client;
 
-    public GitApiCrawler(WebClient.Builder builder, ApiKey apiKey) {
-        System.out.printf("토큰 : %s\n", apiKey.getGitToken());
-        this.client = builder.baseUrl(BASE_URL)
-                .defaultHeader("Authorization", "Bearer " + apiKey.getGitToken())
-                .build();
+    public GitApiCrawler(WebClient client) {
+        this.client = client;
     }
 
     @Override
