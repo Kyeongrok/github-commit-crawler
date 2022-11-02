@@ -26,7 +26,9 @@ class GitCommitCrawlerTest {
     @DisplayName("모든 학생 최신 커밋 조회 : 알고리즘 리포지토리")
     void getLatestCommitsAllMemberAlgorithm() {
         List<CommitPayload> payloads = gitCommitCrawler.getLatestCommitsAllMember(Subject.ALGORITHM);
-        System.out.println(payloads);
+        for (CommitPayload commitPayload : payloads) {
+            System.out.println(commitPayload);
+        }
         System.out.println(payloads.size());
         assertTrue(payloads.size() <= 83);
     }
