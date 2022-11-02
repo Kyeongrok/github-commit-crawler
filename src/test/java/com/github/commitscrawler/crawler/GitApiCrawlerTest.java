@@ -1,23 +1,26 @@
 package com.github.commitscrawler.crawler;
 
+import com.github.commitscrawler.config.DefaultCommitDetailCrawlerFactory;
 import com.github.commitscrawler.domain.Member;
 import com.github.commitscrawler.domain.commit.CommitDetail;
 import com.github.commitscrawler.domain.dto.CommitDetailRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = DefaultCommitDetailCrawlerFactory.class)
 class GitApiCrawlerTest {
     @Autowired
-    private GitApiCrawler gitApiCrawler;
+    private CommitDetailCrawler gitApiCrawler;
 
     private final Member member = new Member("황민우", "menuhwang", "LikeLion", "LikeLion");
 
