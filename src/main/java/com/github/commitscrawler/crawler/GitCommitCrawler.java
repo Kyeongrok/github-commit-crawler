@@ -39,11 +39,10 @@ public class GitCommitCrawler {
 
                 // 멤버정보로 dto 생성.
                 CommitDetailRequest cdr = new CommitDetailRequest(gitUsername, repo);
-                CommitPayload payload = null;
+                CommitPayload payload = new CommitPayload(name);
 
                 try { // getLatestCommit() > commitDetailCrawler.crawlCommitDetail()에서의 예외 처리.
-                    payload = getLatestCommit(cdr);
-                    payload.setMemberName(name);
+                    payload.update(getLatestCommit(cdr));
                 } catch (RuntimeException e) {
                     System.out.println(e.getMessage());
                 }
