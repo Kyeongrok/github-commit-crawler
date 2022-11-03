@@ -25,11 +25,11 @@ public class GitCommitCrawler {
         List<CommitPayload> payloads = members.stream()
                 .parallel()
                 .filter(member -> {
-                if (!member.isValid()) {
-                    System.out.printf("유효하지 않은 유저 정보입니다.\n%s\n", member);
-                    return false;
-                }
-                return true;
+                    if (!member.isValid()) {
+                        System.out.printf("유효하지 않은 유저 정보입니다.\n%s\n", member);
+                        return false;
+                    }
+                    return true;
                 }).map(member -> {
                 String name = member.getName();
                 String gitUsername = member.getGitUsername();
