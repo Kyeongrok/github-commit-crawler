@@ -59,6 +59,7 @@ public class GitCommitCrawler {
             payload = new CommitPayload();
             payload.setMessage(commit.getMessageTitle());
             payload.setPush_at(commit.getCommitter().getDate());
+            payload.setUrl(commitDetails.get(0).getCommitsUrl());
         }
         return payload;
     }
