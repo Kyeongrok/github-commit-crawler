@@ -25,11 +25,11 @@ public class GitCommitCrawler {
         List<CommitPayload> payloads = members.stream()
                 .parallel()
                 .filter(member -> {
-                if (!member.isValid()) {
-                    System.out.printf("유효하지 않은 유저 정보입니다.\n%s\n", member);
-                    return false;
-                }
-                return true;
+                    if (!member.isValid()) {
+                        System.out.printf("유효하지 않은 유저 정보입니다.\n%s\n", member);
+                        return false;
+                    }
+                    return true;
                 }).map(member -> {
                 String name = member.getName();
                 String gitUsername = member.getGitUsername();
@@ -39,11 +39,10 @@ public class GitCommitCrawler {
 
                 // 멤버정보로 dto 생성.
                 CommitDetailRequest cdr = new CommitDetailRequest(gitUsername, repo);
-                CommitPayload payload = null;
+                CommitPayload payload = new CommitPayload(name);
 
                 try { // getLatestCommit() > commitDetailCrawler.crawlCommitDetail()에서의 예외 처리.
-                    payload = getLatestCommit(cdr);
-                    payload.setMemberName(name);
+                    payload.update(getLatestCommit(cdr));
                 } catch (RuntimeException e) {
                     System.out.println(e.getMessage());
                 }
