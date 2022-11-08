@@ -11,4 +11,8 @@ public class CommitDetail {
     private String sha;
     private String html_url;
     private Commit commit;
+
+    public String getCommitsUrl() {
+        return html_url.substring(0, html_url.lastIndexOf("/")) + "s";
+    }
 }
