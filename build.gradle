@@ -23,6 +23,7 @@ dependencies {
     implementation "io.springfox:springfox-swagger-ui:3.0.0"
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.springframework.boot:spring-boot-starter-web:2.7.5'
+    implementation 'org.springframework.boot:spring-boot-starter-mustache:2.7.5'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
@@ -38,6 +39,10 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.jsoup/jsoup
     implementation group: 'org.jsoup', name: 'jsoup', version: '1.15.3'
+
+
+    //
+
 
 
 }
