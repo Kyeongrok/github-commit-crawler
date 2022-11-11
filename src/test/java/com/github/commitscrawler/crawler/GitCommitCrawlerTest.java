@@ -2,7 +2,6 @@ package com.github.commitscrawler.crawler;
 
 import com.github.commitscrawler.domain.commit.CommitPayload;
 import com.github.commitscrawler.domain.dto.CommitDetailRequest;
-import com.github.commitscrawler.lib.enumeration.Subject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,7 +24,8 @@ class GitCommitCrawlerTest {
     @Test
     @DisplayName("모든 학생 최신 커밋 조회 : 알고리즘 리포지토리")
     void getLatestCommitsAllMemberAlgorithm() {
-        List<CommitPayload> payloads = gitCommitCrawler.getLatestCommitsAllMember(Subject.ALGORITHM);
+        String column = "알고리즘 repository-algorithm(Algorithm)";
+        List<CommitPayload> payloads = gitCommitCrawler.getLatestCommitsAllMember(column);
         for (CommitPayload commitPayload : payloads) {
             System.out.println(commitPayload);
         }

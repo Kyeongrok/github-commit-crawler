@@ -22,10 +22,8 @@ public class StudentProgressController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<CommitPayload>> getList(@ApiParam(value = "과목 : algorithm / springboot") @RequestParam("subject") String subjectName) {
-        // todo crawl한 List를 리턴함
-        Subject subject = Subject.valueOf(subjectName.toUpperCase());
-        return ResponseEntity.ok().body(gitCommitCrawler.getLatestCommitsAllMember(subject));
+    public ResponseEntity<List<CommitPayload>> getList(@ApiParam(value = "명렬표 컬럼명 입력") @RequestParam("column") String column) {
+        return ResponseEntity.ok().body(gitCommitCrawler.getLatestCommitsAllMember(column));
     }
 
 }

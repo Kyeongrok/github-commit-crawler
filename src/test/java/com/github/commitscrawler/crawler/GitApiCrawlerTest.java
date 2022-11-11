@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -21,8 +23,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class GitApiCrawlerTest {
     @Autowired
     private CommitDetailCrawler gitApiCrawler;
-
-    private final Member member = new Member("황민우", "menuhwang", "LikeLion", "LikeLion");
+    private final Map<String, String> repositories = new HashMap<>() {{
+        put("알고리즘 repository-algorithm(Algorithm)", "LikeLion");
+        put("SpringBoot", "LikeLion");
+        put("SpringBoot Mustache BBS", "springboot-mustach");
+    }};
+    private final Member member = new Member("황민우", "menuhwang", repositories);
 
     @BeforeEach
     void setUp() {
@@ -32,7 +38,7 @@ class GitApiCrawlerTest {
     @DisplayName("SpringBoot 리포지토리 커밋 리스트 불러오기 : 페이징 기본 설정")
     void getCommitDetail() {
         System.out.printf("Git Token이 Null인지 %b%n", System.getenv().get("GIT_TOKEN") == null);
-        CommitDetailRequest cdr = new CommitDetailRequest(member.getGitUsername(), member.getSpringbootRepository());
+        CommitDetailRequest cdr = new CommitDetailRequest(member.getGitUsername(), member.getRepositories().get("SpringBoot"));
         List<CommitDetail> commitDetails = gitApiCrawler.crawlCommitDetail(cdr);
         System.out.println(commitDetails);
         System.out.println(commitDetails.size());
@@ -44,7 +50,7 @@ class GitApiCrawlerTest {
     void getCommitDetailWithPaging() {
         final int PER_PAGE = 10;
         final int PAGE = 1;
-        CommitDetailRequest cdr = new CommitDetailRequest(member.getGitUsername(), member.getSpringbootRepository(), PER_PAGE, PAGE);
+        CommitDetailRequest cdr = new CommitDetailRequest(member.getGitUsername(), member.getRepositories().get("SpringBoot"), PER_PAGE, PAGE);
         List<CommitDetail> commitDetails = gitApiCrawler.crawlCommitDetail(cdr);
         System.out.println(commitDetails);
         System.out.println(commitDetails.size());
