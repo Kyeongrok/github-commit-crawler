@@ -8,6 +8,7 @@ import com.github.commitscrawler.domain.commit.CommitPayload;
 import com.github.commitscrawler.domain.dto.CommitDetailRequest;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class GitCommitCrawler {
@@ -21,6 +22,8 @@ public class GitCommitCrawler {
 
     public List<CommitPayload> getLatestCommitsAllMember(String column) {
         List<Member> members = dataReader.readMembers();
+        Map<Integer, String> columns = getColumns();
+        if (!columns.containsValue(column)) throw new RuntimeException("잘못된 컬럼입니다.");
         List<CommitPayload> payloads = members.stream()
                 .parallel()
                 .map(member -> {
@@ -54,5 +57,9 @@ public class GitCommitCrawler {
             payload.setUrl(commitDetails.get(0).getCommitsUrl());
         }
         return payload;
+    }
+
+    public Map<Integer, String> getColumns() {
+        return dataReader.readColumn();
     }
 }

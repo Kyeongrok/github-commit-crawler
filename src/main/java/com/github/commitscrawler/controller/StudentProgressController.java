@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/progress")
@@ -26,4 +27,8 @@ public class StudentProgressController {
         return ResponseEntity.ok().body(gitCommitCrawler.getLatestCommitsAllMember(column));
     }
 
+    @GetMapping("/columns")
+    public Map<Integer, String> getColumns() {
+        return gitCommitCrawler.getColumns();
+    }
 }
