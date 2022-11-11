@@ -33,7 +33,7 @@ github.com/{owner}/{repo}/commits
 
 ### OAuth.json 필요합니다.
 
-1. Google Sheets API 사용을 위해 dependency 추가가 필요하고 OAuth 발급이 필요합니다.
+1. Google Sheets API 사용을 위해 dependency 추가가 필요하고 OAuth 발급이 필요합니다. [참조](https://velog.io/@junsugi/Google-Sheet-%EC%97%B0%EB%8F%99%ED%95%98%EA%B8%B0-feat.-Google-API#%EC%84%9C%EB%B9%84%EC%8A%A4-%EA%B3%84%EC%A0%95-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0)
 
 2. 발급 받은 OAuth json 파일이름을 credential.json 으로 변경합니다.
 
