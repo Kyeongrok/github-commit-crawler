@@ -33,6 +33,22 @@ github.com/{owner}/{repo}/commits
 
 ### OAuth.json 필요합니다.
 
-Google Sheets API 사용을 위해 dependency 추가가 필요하고 OAuth 발급이 필요합니다.
+1. Google Sheets API 사용을 위해 dependency 추가가 필요하고 OAuth 발급이 필요합니다. [참조](https://velog.io/@junsugi/Google-Sheet-%EC%97%B0%EB%8F%99%ED%95%98%EA%B8%B0-feat.-Google-API#%EC%84%9C%EB%B9%84%EC%8A%A4-%EA%B3%84%EC%A0%95-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0)
 
-발급한 OAuth json 파일이름을 credential.json 로 변경하여 src/main/resources/에 저장해야 동작합니다.
+2. 발급 받은 OAuth json 파일이름을 credential.json 으로 변경합니다.
+
+3. 프로젝트 루트 디렉토리 위치에 /google-sheets 폴더를 생성하여 폴더안에 위치시킵니다.
+
+4. 프로젝트를 로컬에서 실행시켜 OAuth 인증 과정을 거칩니다.
+
+5. /google-sheets 폴더 내에 StoredCredential 파일이 생기면 정상적으로 인증된것 입니다.
+
+6. 이 두 파일을 ec2 서버 내 한 폴더에 복사하고 그 폴더를 도커 컨테이너 실행시 컨테이너의 /google-sheets 볼륨과 마운트를 합니다.
+
+### 도커 컨테이너 실행
+```bash
+docker run -d --name commit-crawler -p 80:8080 \
+-e GIT_TOKEN={GitHub Token} \
+-v {local volume}:/google-sheets \
+git-commits-crawler
+```
