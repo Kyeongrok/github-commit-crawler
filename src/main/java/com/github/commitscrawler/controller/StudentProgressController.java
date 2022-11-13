@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/progress")
@@ -22,10 +23,12 @@ public class StudentProgressController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<CommitPayload>> getList(@ApiParam(value = "과목 : algorithm / springboot") @RequestParam("subject") String subjectName) {
-        // todo crawl한 List를 리턴함
-        Subject subject = Subject.valueOf(subjectName.toUpperCase());
-        return ResponseEntity.ok().body(gitCommitCrawler.getLatestCommitsAllMember(subject));
+    public ResponseEntity<List<CommitPayload>> getList(@ApiParam(value = "명렬표 컬럼명 입력") @RequestParam("column") String column) {
+        return ResponseEntity.ok().body(gitCommitCrawler.getLatestCommitsAllMember(column));
     }
 
+    @GetMapping("/columns")
+    public Map<Integer, String> getColumns() {
+        return gitCommitCrawler.getColumns();
+    }
 }
