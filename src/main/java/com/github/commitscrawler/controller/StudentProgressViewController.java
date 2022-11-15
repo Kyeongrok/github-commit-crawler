@@ -38,4 +38,9 @@ public class StudentProgressViewController {
 
         return "list";
     }
+
+    @GetMapping("")
+    public String index() {
+        return "index";
+    }
 }
