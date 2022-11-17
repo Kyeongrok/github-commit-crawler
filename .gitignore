@@ -37,3 +37,7 @@ out/
 .vscode/
 /src/main/resources/credential.json
 /tokens/
+
+credential.json
+/google-sheets/credentials.json
+/src/main/resources/credentials.json
