@@ -23,23 +23,23 @@ public class StudentProgressViewController {
     }
 
     // ex) http://localhost:8080/api/v1/progress/view?columnIdx=B
-    @GetMapping("")
-    public String getList(@ApiParam(value = "컬럼Idx: B / C / D / E ...") @RequestParam("columnIdx") String columnIdx, Model model) {
-        // todo 이전 로직과 호환성 유지를 위한 부분
-        String subjectName = "algorithm";
-        switch (columnIdx.toUpperCase()) {
-            case "B": subjectName = "algoritym"; break;
-            case "C": subjectName = "springboot"; break;
-            case "D": subjectName = "springmvc"; break;
-        }
-        Subject subject = Subject.valueOf(subjectName.toUpperCase());
-        List<CommitPayload> commitPayloads = gitCommitCrawler.getLatestCommitsAllMember(subject);
-        model.addAttribute("commitPayloads", commitPayloads);
+//    @GetMapping("")
+//    public String getList(@ApiParam(value = "컬럼Idx: B / C / D / E ...") @RequestParam("columnIdx") String columnIdx, Model model) {
+//        // todo 이전 로직과 호환성 유지를 위한 부분
+//        String subjectName = "algorithm";
+//        switch (columnIdx.toUpperCase()) {
+//            case "B": subjectName = "algoritym"; break;
+//            case "C": subjectName = "springboot"; break;
+//            case "D": subjectName = "springmvc"; break;
+//        }
+//        Subject subject = Subject.valueOf(subjectName.toUpperCase());
+//        List<CommitPayload> commitPayloads = gitCommitCrawler.getLatestCommitsAllMember(subject);
+//        model.addAttribute("commitPayloads", commitPayloads);
+//
+//        return "list";
+//    }
 
-        return "list";
-    }
-
-    @GetMapping("")
+    @GetMapping("/index")
     public String index() {
         return "index";
     }
