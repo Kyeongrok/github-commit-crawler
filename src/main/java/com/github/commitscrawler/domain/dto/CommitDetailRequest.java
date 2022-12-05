@@ -17,9 +17,6 @@ public class CommitDetailRequest {
     private int page; // from no
 
     public CommitDetailRequest(String owner, String repo) {
-        this.owner = owner;
-        this.repo = repo;
-        this.page = DEFAULT_PAGE;
-        this.perPage = DEFAULT_PER_PAGE;
+        this(owner, repo, DEFAULT_PER_PAGE, DEFAULT_PAGE);
     }
 }

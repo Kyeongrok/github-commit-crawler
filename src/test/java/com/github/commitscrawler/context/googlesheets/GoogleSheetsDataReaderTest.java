@@ -14,8 +14,10 @@ class GoogleSheetsDataReaderTest {
 
     @Test
     void read() {
-        List<Member> members = googleSheetsMemberReader.readMembers();
-        System.out.println(members);
+        List<Member> members = googleSheetsMemberReader.readMemberRepositories();
+        for (Member member : members) {
+            System.out.println(member);
+        }
     }
 
     @Test

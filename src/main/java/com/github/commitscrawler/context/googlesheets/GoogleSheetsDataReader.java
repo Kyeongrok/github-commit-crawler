@@ -19,7 +19,7 @@ public class GoogleSheetsDataReader implements DataReader {
     }
 
     @Override
-    public List<Member> readMembers() {
+    public List<Member> readMemberRepositories() {
         final String sheetsId = "1cJ9XQDISo3B6UHzcDmWtG9ucDRDg_YgJPkkW9atCFjk";
         final String range = "repositories!2:100";
         List<List<Object>> values = googleSheets.read(sheetsId, range);

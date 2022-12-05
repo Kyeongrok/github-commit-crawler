@@ -53,17 +53,17 @@
             const now = Date.now();
             for (let i = 0; i < data.length; i++) {
                 const member = data[i];
-                const push_at = new Date(member.push_at)
-                let tr = (member.url === null) ? `
+                const push_at = new Date(member.latestCommitDatetime)
+                let tr = (member.gitRepositoryAddress === null) ? `
                     <tr class="table-warning">
-                        <td>${member.memberName}</td>
+                        <td>${member.name}</td>
                         <td>명렬표의 깃허브 주소를 확인해주세요. [컬럼명 : ${column}]</td>
                         <td></td>
                     </tr>
                 ` : `
-                    <tr role="button" onclick="window.open('${member.url}')">
-                        <td>${member.memberName}</td>
-                        <td>${(now - push_at.getTime() < 30 * 60 * 1000) ? '<span class="badge text-bg-secondary">NEW</span>':""} ${member.message}</td>
+                    <tr role="button" onclick="window.open('${member.gitRepositoryAddress}')">
+                        <td>${member.name}</td>
+                        <td>${(now - push_at.getTime() < 30 * 60 * 1000) ? '<span class="badge text-bg-secondary">NEW</span>':""} ${member.commitMessage}</td>
                         <td>${format(push_at)}</td>
                     </tr>
                 `

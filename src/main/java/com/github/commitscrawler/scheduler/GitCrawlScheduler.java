@@ -16,10 +16,9 @@ public class GitCrawlScheduler {
         this.gitCommitCrawlService = gitCommitCrawlService;
     }
 
-    @Scheduled(cron = "* */10 9-16 * * MON-FRI") // 9-16시 사이 매 10분 마다 월~금
+    @Scheduled(cron = "0 */10 9-16 * * MON-FRI") // 9-16시 사이 매 10분 마다 월~금
     public void run() {
         // crawl을 여기에서 수행함
         gitCommitCrawlService.crawl();
-
     }
 }
