@@ -2,6 +2,7 @@ package com.github.commitscrawler.crawler;
 
 import com.github.commitscrawler.domain.commit.CommitDetail;
 import com.github.commitscrawler.domain.dto.CommitDetailRequest;
+import com.github.commitscrawler.domain.entity.StudentCommit;
 import com.github.commitscrawler.parser.GitCommitHtmlParser;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -20,7 +21,7 @@ public class GitHtmlParser implements CommitDetailCrawler {
         this.gitCommitHtmlParser = gitCommitHtmlParser;
     }
 
-    @Override
+//    @Override
     public List<CommitDetail> crawlCommitDetail(CommitDetailRequest cdr) {
         // cdr의 정보를 받아서 http request를 전송해 List<CommitDetail>을 리턴
 
@@ -42,5 +43,10 @@ public class GitHtmlParser implements CommitDetailCrawler {
                 .append("/").append(repo)
                 .append("/commits");
         return sb.toString();
+    }
+
+    @Override
+    public StudentCommit crawlStudentCommit(String name, String subject, String repositoryURL) {
+        return null;
     }
 }

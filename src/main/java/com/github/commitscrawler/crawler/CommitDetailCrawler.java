@@ -1,10 +1,7 @@
 package com.github.commitscrawler.crawler;
 
-import com.github.commitscrawler.domain.commit.CommitDetail;
-import com.github.commitscrawler.domain.dto.CommitDetailRequest;
+import com.github.commitscrawler.domain.entity.StudentCommit;
 
-import java.util.List;
-
-public interface CommitDetailCrawler {
-    List<CommitDetail> crawlCommitDetail(CommitDetailRequest cdr);
+public interface  CommitDetailCrawler {
+    StudentCommit crawlStudentCommit(String name, String subject, String repositoryURL);
 }

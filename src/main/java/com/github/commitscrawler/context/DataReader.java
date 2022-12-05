@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface DataReader {
-    List<Member> readMembers();
+    List<Member> readMemberRepositories();
     Map<Integer, String> readColumn();
 }
