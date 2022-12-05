@@ -53,7 +53,14 @@
             const now = Date.now();
             for (let i = 0; i < data.length; i++) {
                 const member = data[i];
-                const push_at = new Date(member.latestCommitDatetime)
+                const newDate = new Date(member.latestCommitDatetime);
+                const year = newDate.getFullYear();
+                const month = newDate.getMonth();
+                const date = newDate.getDate();
+                const hour = newDate.getHours();
+                const minute = newDate.getMinutes();
+                const sec = newDate.getSeconds();
+                const push_at = new Date(Date.UTC(year, month, date, hour, minute, sec));
                 let tr = (member.gitRepositoryAddress === null) ? `
                     <tr class="table-warning">
                         <td>${member.name}</td>
